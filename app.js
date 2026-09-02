@@ -101,7 +101,9 @@
     // PageLoad fires once the widget is mounted inside the record page and
     // hands us the id of the record we're sitting on.
     ZOHO.embeddedApp.on("PageLoad", function (data) {
+      console.log("[debug] PageLoad data:", data); // TEMP: remove once getRecord is confirmed working
       state.recordId = data && data.EntityId ? data.EntityId[0] : null;
+      console.log("[debug] resolved recordId:", state.recordId); // TEMP
       if (!state.recordId) {
         showError("Couldn't determine which contact this widget is on.");
         return;
@@ -128,6 +130,7 @@
   function loadRecord() {
     ZOHO.CRM.API.getRecord({ Entity: MODULE, RecordID: state.recordId })
       .then(function (response) {
+        console.log("[debug] getRecord response:", response); // TEMP: remove once confirmed working
         if (!response || !response.data || !response.data[0]) {
           throw new Error("Empty response from CRM.");
         }
