@@ -74,7 +74,7 @@
     els.editBtn.addEventListener("click", enterEditMode);
     els.cancelBtn.addEventListener("click", exitEditMode);
     els.form.addEventListener("submit", onSave);
-    els.retryBtn.addEventListener("click", boot);
+    els.retryBtn.addEventListener("click", retry);
     els.lookupBtn.addEventListener("click", function () {
       runPostalLookup(els.postalCode.value);
     });
