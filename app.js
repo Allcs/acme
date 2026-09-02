@@ -112,6 +112,19 @@
     ZOHO.embeddedApp.init();
   }
 
+  // The SDK's init() handshake only ever runs once per page load, so a
+  // "Retry" after boot() has already completed must just re-fetch — calling
+  // boot() again re-registers PageLoad and re-calls init(), which the SDK
+  // doesn't support and left Retry spinning forever.
+  function retry() {
+    if (state.recordId) {
+      showLoading();
+      loadRecord();
+    } else {
+      boot();
+    }
+  }
+
   function loadRecord() {
     ZOHO.CRM.API.getRecord({ Entity: MODULE, RecordID: state.recordId })
       .then(function (response) {
